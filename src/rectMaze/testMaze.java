@@ -15,6 +15,5 @@ class testMaze {
 	
 	@Test
 	void testNodeCreation() {
-		Maze.Node n = new test.Node();
 	}
 }
