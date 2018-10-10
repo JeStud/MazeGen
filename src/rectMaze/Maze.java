@@ -11,7 +11,7 @@ public class Maze
 	private Node[][] mazetrix;
 	
 	//INNER CLASSES
-	public class Node
+	private class Node
 	{
 		HashSet<Direction> connections;
 		Boolean unvisited = true;
@@ -20,8 +20,6 @@ public class Maze
 		{
 			connections = new HashSet<Direction>();
 		}
-
-		public void draw(){}
 		
 		private Boolean isUnvisited()
 		{
@@ -95,43 +93,59 @@ public class Maze
 			defaultDirections.add(Direction.LEFT);
 		Stack<Direction> availableDirections;
 		Direction tempDirection;
-		Node tempNode;
+		Node tempNode, lastNode;
 		
 		int y, x;
 		
-		//TODO: Generate a maze
 		//set a start point
 		y = rand.nextInt(height);
 		x = rand.nextInt(width);
+		lastNode = maze.getNode(x, y);
 		
-		//create loop (do while steps not empty?)
+		//main generation loop: takes a step and ends when there are no more steps possible
 		do
 		{
 			//reset directions set
 			availableDirections = new Stack<Direction>();
 			availableDirections.addAll(defaultDirections);
+			//shuffle the directions so that they are in a random order
 			Collections.shuffle(availableDirections);
 			
+			//directions loop: tries random directions until it finds one (and then repeats) or ends, where a step will be popped
 			do
 			{
-				//choose a random direction
+				//try to go to a random node
 				tempDirection = availableDirections.pop();
 				tempNode = maze.getNode(x+tempDirection.getX(), y+tempDirection.getY());
-				//if works
-				if( tempNode.isUnvisited() )
+				//if the node works
+				if( tempNode != null && tempNode.isUnvisited() )
 				{
-					tempNode.addDirection(tempDirection);
+					//add the connection to the maze
+					lastNode.addDirection(tempDirection);
+
+					//remember the direction we went
 					steps.push(tempDirection);
+					
+					//change all the local variables for the next iteration
+					lastNode = tempNode;
 					y = y + tempDirection.getY();
 					x = x + tempDirection.getX();
+					
+					//reset directions set
+					availableDirections = new Stack<Direction>();
+					availableDirections.addAll(defaultDirections);
 				}
-			} while( !availableDirections.empty() );
+			} while( !availableDirections.empty());
+			
+			//pop the last step taken, and step out
 			try
 			{
 				tempDirection = steps.pop();
-				x = x+tempDirection.getX();
-				y = y+tempDirection.getY();
+				x = x - tempDirection.getX();
+				y = y - tempDirection.getY();
+				lastNode = maze.getNode(x, y);
 			}
+			//in case of emergency, run around screaming
 			catch (RuntimeException EmptyStackException)
 			{
 				System.err.println("No steps in the stack");
@@ -146,7 +160,14 @@ public class Maze
 	//GETTERS
 	public Node getNode(int x,int y)
 	{
-		return this.mazetrix[y][x];
+		try
+		{
+			return this.mazetrix[y][x];
+		}
+		catch (RuntimeException EmptyStackException)
+		{
+			return null;
+		}
 	}
 	
 	public int getHeight()
@@ -156,11 +177,5 @@ public class Maze
 	public int getWidth()
 	{
 		return this.width;
-	}
-	
-	//SETTERS
-	private void setNode(Node n, int x, int y)
-	{
-		this.mazetrix[y][x] = n;
 	}
 }
