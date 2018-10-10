@@ -1,5 +1,7 @@
 package rectMaze;
 
+import static org.junit.Assert.assertFalse;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,5 +17,6 @@ class testMaze {
 	
 	@Test
 	void testNodeCreation() {
+		assertFalse(test.getNode(0, 0) == null);
 	}
 }

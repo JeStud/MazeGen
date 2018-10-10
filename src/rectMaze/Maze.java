@@ -1,43 +1,48 @@
 package rectMaze;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Stack;
+
 public class Maze
 {
-	int height, width;
-	Node[][] mazetrix;
+	private int height, width;
+	private Node[][] mazetrix;
 	
 	//INNER CLASSES
 	public class Node
 	{
-		Direction[] connections;
-		Boolean visited = false;
+		HashSet<Direction> connections;
+		Boolean unvisited = true;
 		
 		private Node()
 		{
-			connections = new Direction[4];
+			connections = new HashSet<Direction>();
 		}
-		/*
-		private Node( Direction[] directions )
-		{
-			connections = new Direction[4];
-			try {
-				for(int i=0;i<directions.length;i++)
-				{
-					this.connections[i] = directions[i];
-				}
-			} catch (ArrayIndexOutOfBoundsException e) {
-				System.out.println("Directions-Array too large");
-			}
-		}
-		*/
+
 		public void draw(){}
 		
-		private Boolean getVisited()
+		private Boolean isUnvisited()
 		{
-			return this.visited;
+			return this.unvisited;
 		}
-		private void setVisited(Boolean v)
+		private void setUnvisited(Boolean v)
 		{
-			this.visited = v;
+			this.unvisited = v;
+		}
+		
+		private void addDirection(Direction newDirection)
+		{
+			connections.add(newDirection);
+		}
+		private void removeDirection(Direction delDirection)
+		{
+			connections.remove(delDirection);
+		}
+		private void clearDirections()
+		{
+			connections = new HashSet<Direction>();
 		}
 	}
 	
@@ -70,16 +75,71 @@ public class Maze
 		{
 			for(int x=0;x<width;x++)
 			{
-				
+				this.mazetrix[y][x] = new Node();
 			}
 		}
 	}
-	
+
+	//GENERATION
 	public static Maze depthFirstGen(int height, int width)
 	{
+		//definitions
 		Maze maze = new Maze(height, width);
+		Stack<Direction> steps = new Stack<Direction>();
+		Random rand = new Random();
+		
+		Stack<Direction> defaultDirections = new Stack<Direction>();
+			defaultDirections.add(Direction.UP);
+			defaultDirections.add(Direction.RIGHT);
+			defaultDirections.add(Direction.DOWN);
+			defaultDirections.add(Direction.LEFT);
+		Stack<Direction> availableDirections;
+		Direction tempDirection;
+		Node tempNode;
+		
+		int y, x;
 		
 		//TODO: Generate a maze
+		//set a start point
+		y = rand.nextInt(height);
+		x = rand.nextInt(width);
+		
+		//create loop (do while steps not empty?)
+		do
+		{
+			//reset directions set
+			availableDirections = new Stack<Direction>();
+			availableDirections.addAll(defaultDirections);
+			Collections.shuffle(availableDirections);
+			
+			do
+			{
+				//choose a random direction
+				tempDirection = availableDirections.pop();
+				tempNode = maze.getNode(x+tempDirection.getX(), y+tempDirection.getY());
+				//if works
+				if( tempNode.isUnvisited() )
+				{
+					tempNode.addDirection(tempDirection);
+					steps.push(tempDirection);
+					y = y + tempDirection.getY();
+					x = x + tempDirection.getX();
+				}
+			} while( !availableDirections.empty() );
+			try
+			{
+				tempDirection = steps.pop();
+				x = x+tempDirection.getX();
+				y = y+tempDirection.getY();
+			}
+			catch (RuntimeException EmptyStackException)
+			{
+				System.err.println("No steps in the stack");
+				//let the program just die
+			}
+			
+		} while( steps.size()>0 );
+		
 		return maze;
 	}
 	
@@ -89,6 +149,14 @@ public class Maze
 		return this.mazetrix[y][x];
 	}
 	
+	public int getHeight()
+	{
+		return this.height;
+	}
+	public int getWidth()
+	{
+		return this.width;
+	}
 	
 	//SETTERS
 	private void setNode(Node n, int x, int y)
