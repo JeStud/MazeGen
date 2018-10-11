@@ -45,12 +45,14 @@ public class Maze
 	}
 	
 	private enum Direction {
-	    UP(1,0), RIGHT(0,1), DOWN(-1,0), LEFT(0,-1);
+	    UP(1,0,"^"), RIGHT(0,1,">"), DOWN(-1,0,"v"), LEFT(0,-1,"<");
 	    private int y,x;
+	    private String pointer;
 
-	    private Direction(int y, int x) {
+	    private Direction(int y, int x, String pointer) {
 	            this.y = y;
 	            this.x = x;
+	            this.pointer = pointer;
 	    }
 	    
 	    private int getX()
@@ -60,6 +62,10 @@ public class Maze
 	    private int getY()
 	    {
 	    	return this.y;
+	    }
+	    private String getPointer()
+	    {
+	    	return this.pointer;
 	    }
 	}
 	
@@ -79,7 +85,7 @@ public class Maze
 	}
 
 	//GENERATION
-	public static Maze depthFirstGen(int height, int width)
+	public static Maze depthFirstGen(int height, int width, boolean randStart)
 	{
 		//definitions
 		Maze maze = new Maze(height, width);
@@ -98,9 +104,18 @@ public class Maze
 		int y, x;
 		
 		//set a start point
-		y = rand.nextInt(height);
-		x = rand.nextInt(width);
+		if(randStart)
+		{
+			y = rand.nextInt(height);
+			x = rand.nextInt(width);
+		}
+		else
+		{
+			y = 0;
+			x = 0;
+		}
 		lastNode = maze.getNode(x, y);
+		lastNode.setUnvisited(false);
 		
 		//main generation loop: takes a step and ends when there are no more steps possible
 		do
@@ -128,6 +143,7 @@ public class Maze
 					
 					//change all the local variables for the next iteration
 					lastNode = tempNode;
+					lastNode.setUnvisited(false);
 					y = y + tempDirection.getY();
 					x = x + tempDirection.getX();
 					
@@ -155,6 +171,24 @@ public class Maze
 		} while( steps.size()>0 );
 		
 		return maze;
+	}
+
+	//DISPLAY
+	public void displayMaze()
+	{
+		for(int x=0;x<width;x++)
+		{
+			for(int y=0;y<height;y++)
+			{
+				System.out.print(x+","+y+"[");
+				for(Direction direction : this.getNode(x,y).connections)
+				{
+					System.out.print( direction.getPointer() );
+				}
+				System.out.print("] ");
+			}
+			System.out.print("\n");
+		}
 	}
 	
 	//GETTERS

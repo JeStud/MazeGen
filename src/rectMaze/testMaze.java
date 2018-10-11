@@ -12,7 +12,7 @@ class testMaze {
 	@BeforeEach
 	void setUp()
 	{
-		test = Maze.depthFirstGen(3, 3);
+		test = Maze.depthFirstGen(3, 3, true);
 	}
 	
 	@Test
