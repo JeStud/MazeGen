@@ -1,5 +1,8 @@
 package rectMaze;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
@@ -174,7 +177,7 @@ public class Maze
 	}
 
 	//DISPLAY
-	public void displayMaze()
+	public void display()
 	{
 		for(int y=0;y<height;y++)
 		{
@@ -201,6 +204,14 @@ public class Maze
 			}
 			System.out.print("\n");
 		}
+	}
+	
+	public void export(String path, int cellSize)
+	{
+		BufferedImage pic = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = (Graphics2D) pic.getGraphics();
+		g.setBackground(Color.BLACK);
+		//ImageIO.write(BufferedImage, "PNG", path);
 	}
 	
 	//GETTERS
