@@ -3,10 +3,14 @@ package rectMaze;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Stack;
+
+import javax.imageio.ImageIO;
 
 public class Maze
 {
@@ -126,6 +130,7 @@ public class Maze
 			//reset directions set
 			availableDirections = new Stack<Direction>();
 			availableDirections.addAll(defaultDirections);
+			
 			//shuffle the directions so that they are in a random order
 			Collections.shuffle(availableDirections);
 			
@@ -208,10 +213,31 @@ public class Maze
 	
 	public void export(String path, int cellSize)
 	{
-		BufferedImage pic = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
+		BufferedImage pic = new BufferedImage( (2*this.width+1)*cellSize, (2*this.height+1)*cellSize, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = (Graphics2D) pic.getGraphics();
-		g.setBackground(Color.BLACK);
-		//ImageIO.write(BufferedImage, "PNG", path);
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, (2*this.width+1)*cellSize, (2*this.height+1)*cellSize);
+		g.setColor(Color.WHITE);
+		
+		for(int y=0;y<height;y++)
+		{
+			for(int x=0;x<width;x++)
+			{
+				Node tempNode = this.getNode(y, x);
+				g.fillRect((2*x+1)*cellSize, (2*y+1)*cellSize, cellSize, cellSize);
+				
+				for(Direction direction : tempNode.connections)
+				{
+					g.fillRect( ((2*x+1) + direction.getX())*cellSize, ((2*y+1) + direction.getY())*cellSize, cellSize, cellSize);
+				}
+			}
+		}
+		
+		try {
+			ImageIO.write(pic, "PNG", new File(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//GETTERS
