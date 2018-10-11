@@ -45,7 +45,7 @@ public class Maze
 	}
 	
 	private enum Direction {
-	    UP(1,0,"^"), RIGHT(0,1,">"), DOWN(-1,0,"v"), LEFT(0,-1,"<");
+	    UP(-1,0,"^"), RIGHT(0,1,">"), DOWN(1,0,"v"), LEFT(0,-1,"<");
 	    private int y,x;
 	    private String pointer;
 
@@ -114,7 +114,7 @@ public class Maze
 			y = 0;
 			x = 0;
 		}
-		lastNode = maze.getNode(x, y);
+		lastNode = maze.getNode(y, x);
 		lastNode.setUnvisited(false);
 		
 		//main generation loop: takes a step and ends when there are no more steps possible
@@ -131,7 +131,7 @@ public class Maze
 			{
 				//try to go to a random node
 				tempDirection = availableDirections.pop();
-				tempNode = maze.getNode(x+tempDirection.getX(), y+tempDirection.getY());
+				tempNode = maze.getNode(y+tempDirection.getY(), x+tempDirection.getX());
 				//if the node works
 				if( tempNode != null && tempNode.isUnvisited() )
 				{
@@ -159,7 +159,7 @@ public class Maze
 				tempDirection = steps.pop();
 				x = x - tempDirection.getX();
 				y = y - tempDirection.getY();
-				lastNode = maze.getNode(x, y);
+				lastNode = maze.getNode(y, x);
 			}
 			//in case of emergency, run around screaming
 			catch (RuntimeException EmptyStackException)
@@ -176,23 +176,35 @@ public class Maze
 	//DISPLAY
 	public void displayMaze()
 	{
-		for(int x=0;x<width;x++)
+		for(int y=0;y<height;y++)
 		{
-			for(int y=0;y<height;y++)
+			for(int x=0;x<width;x++)
 			{
-				System.out.print(x+","+y+"[");
-				for(Direction direction : this.getNode(x,y).connections)
+				Node tempNode = this.getNode(y, x);
+				System.out.print("[");
+				for(Direction direction : tempNode.connections)
 				{
 					System.out.print( direction.getPointer() );
 				}
 				System.out.print("] ");
+				
+				System.out.print(x+","+y+"(");
+				
+				if(tempNode.isUnvisited())
+				{
+					System.out.print("iU)");
+				}
+				else
+				{
+					System.out.print("iV)");
+				}
 			}
 			System.out.print("\n");
 		}
 	}
 	
 	//GETTERS
-	public Node getNode(int x,int y)
+	public Node getNode(int y,int x)
 	{
 		try
 		{
