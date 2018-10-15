@@ -5,12 +5,12 @@ import java.awt.CardLayout;
 
 import javax.swing.JFrame;
 
-public class Windows extends JFrame
+public class RectMazeDialogue extends JFrame
 {
 	private Button something = new Button("something");
 	private CardLayout myLayout = new CardLayout();
 	
-	public Windows()
+	public RectMazeDialogue()
 	{
 		this.setTitle("Some title");
 		this.setSize(384,216);
