@@ -4,7 +4,8 @@ import java.util.HashSet;
 
 import helper.Direction;
 
-public class RectNode {
+public class RectNode
+{
 	public HashSet<Direction> connections;
 	public Boolean unvisited = true;
 	

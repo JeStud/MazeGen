@@ -10,9 +10,10 @@ import javax.imageio.ImageIO;
 
 import rectMaze.Maze;
 
-public class Graphics {
-	
-	public static BufferedImage draw(Maze m, int cellSize, Color backCol, Color foreCol) {
+public class Graphics
+{
+	public static BufferedImage draw(Maze m, int cellSize, Color backCol, Color foreCol)
+	{
 		BufferedImage pic = new BufferedImage( (2*m.getWidth()+1)*cellSize, (2*m.getHeight()+1)*cellSize, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = (Graphics2D) pic.getGraphics();
 		g.setColor(backCol);
