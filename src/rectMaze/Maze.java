@@ -1,93 +1,30 @@
 package rectMaze;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Stack;
 
-import javax.imageio.ImageIO;
+import helper.Direction;
+import helper.RectNode;
 
 public class Maze
 {
 	//MAZE VARIABLES
 	private int height, width;
-	private Node[][] mazetrix;
-	
-	//INNER CLASSES
-	private class Node
-	{
-		HashSet<Direction> connections;
-		Boolean unvisited = true;
-		
-		private Node()
-		{
-			connections = new HashSet<Direction>();
-		}
-		
-		private Boolean isUnvisited()
-		{
-			return this.unvisited;
-		}
-		private void setUnvisited(Boolean v)
-		{
-			this.unvisited = v;
-		}
-		
-		private void addDirection(Direction newDirection)
-		{
-			connections.add(newDirection);
-		}
-		private void removeDirection(Direction delDirection)
-		{
-			connections.remove(delDirection);
-		}
-		private void clearDirections()
-		{
-			connections = new HashSet<Direction>();
-		}
-	}
-	
-	private enum Direction {
-	    UP(-1,0,"^"), RIGHT(0,1,">"), DOWN(1,0,"v"), LEFT(0,-1,"<");
-	    private int y,x;
-	    private String pointer;
-
-	    private Direction(int y, int x, String pointer) {
-	            this.y = y;
-	            this.x = x;
-	            this.pointer = pointer;
-	    }
-	    
-	    private int getX()
-	    {
-	    	return this.x;
-	    }
-	    private int getY()
-	    {
-	    	return this.y;
-	    }
-	    private String getPointer()
-	    {
-	    	return this.pointer;
-	    }
-	}
+	private RectNode[][] mazetrix;
 	
 	//CREATION
 	private Maze(int height, int width)
 	{
 		this.height = height;
 		this.width = width;
-		this.mazetrix = new Node[height][width];
+		this.mazetrix = new RectNode[height][width];
 		for(int y=0;y<height;y++)
 		{
 			for(int x=0;x<width;x++)
 			{
-				this.mazetrix[y][x] = new Node();
+				this.mazetrix[y][x] = new RectNode();
 			}
 		}
 	}
@@ -108,7 +45,7 @@ public class Maze
 			defaultDirections.add(Direction.LEFT);
 		Stack<Direction> availableDirections;
 		Direction tempDirection;
-		Node tempNode, lastNode;
+		RectNode tempNode, lastNode;
 		
 		int y, x;
 		
@@ -201,7 +138,7 @@ public class Maze
 			defaultDirections.add(Direction.LEFT);
 		Stack<Direction> availableDirections;
 		Direction tempDirection;
-		Node tempNode, lastNode;
+		RectNode tempNode, lastNode;
 		
 		int y, x;
 		
@@ -284,7 +221,7 @@ public class Maze
 		{
 			for(int x=0;x<width;x++)
 			{
-				Node tempNode = this.getNode(y, x);
+				RectNode tempNode = this.getNode(y, x);
 				System.out.print("[");
 				for(Direction direction : tempNode.connections)
 				{
@@ -307,20 +244,13 @@ public class Maze
 		}
 	}
 	
-	//simple b&w export
-	public void export(String path, int cellSize)
+	public void draw(Graphics2D g, int cellSize)
 	{
-		BufferedImage pic = new BufferedImage( (2*this.width+1)*cellSize, (2*this.height+1)*cellSize, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = (Graphics2D) pic.getGraphics();
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, (2*this.width+1)*cellSize, (2*this.height+1)*cellSize);
-		g.setColor(Color.WHITE);
-		
 		for(int y=0;y<height;y++)
 		{
 			for(int x=0;x<width;x++)
 			{
-				Node tempNode = this.getNode(y, x);
+				RectNode tempNode = this.getNode(y, x);
 				g.fillRect((2*x+1)*cellSize, (2*y+1)*cellSize, cellSize, cellSize);
 				
 				for(Direction direction : tempNode.connections)
@@ -328,46 +258,11 @@ public class Maze
 					g.fillRect( ((2*x+1) + direction.getX())*cellSize, ((2*y+1) + direction.getY())*cellSize, cellSize, cellSize);
 				}
 			}
-		}
-		
-		try {
-			ImageIO.write(pic, "PNG", new File(path));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	//export using specific colors for fore and background
-	public void export(String path, int cellSize, Color foreCol, Color backCol)
-	{
-		BufferedImage pic = new BufferedImage( (2*this.width+1)*cellSize, (2*this.height+1)*cellSize, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = (Graphics2D) pic.getGraphics();
-		g.setColor(backCol);
-		g.fillRect(0, 0, (2*this.width+1)*cellSize, (2*this.height+1)*cellSize);
-		g.setColor(foreCol);
-		
-		for(int y=0;y<height;y++)
-		{
-			for(int x=0;x<width;x++)
-			{
-				Node tempNode = this.getNode(y, x);
-				g.fillRect((2*x+1)*cellSize, (2*y+1)*cellSize, cellSize, cellSize);
-				
-				for(Direction direction : tempNode.connections)
-				{
-					g.fillRect( ((2*x+1) + direction.getX())*cellSize, ((2*y+1) + direction.getY())*cellSize, cellSize, cellSize);
-				}
-			}
-		}
-		
-		try {
-			ImageIO.write(pic, "PNG", new File(path));
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 	
 	//GETTERS
-	public Node getNode(int y,int x)
+	public RectNode getNode(int y,int x)
 	{
 		try
 		{
