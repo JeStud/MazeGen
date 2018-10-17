@@ -7,12 +7,15 @@ import java.text.NumberFormat;
 
 import javax.swing.JFormattedTextField;
 
-import graphics.Display;
+import frames.Display;
 import graphics.Graphics;
 import rectMaze.Maze;
 
 public class RectMazeListener implements ActionListener
 {
+	private final int cellSize = 10;
+	private final String path = "D:\\Data\\WinFolders\\Desktop\\pic.png";
+	
 	private JFormattedTextField widthField = new JFormattedTextField(NumberFormat.getNumberInstance());
 	private JFormattedTextField heightField = new JFormattedTextField(NumberFormat.getNumberInstance());
 	private JFormattedTextField backgroundColorField = new JFormattedTextField("000000"); //TODO needs the # added on to the front
@@ -43,8 +46,8 @@ public class RectMazeListener implements ActionListener
 			{ frClr = Color.RED;/*TODO display an error pop up*/ }
 		
 		Maze maze = Maze.depthFirstGen(y, x, true);
-		Display d = new Display(x*10, y*10, maze);
-		Graphics.export(maze, "D:\\Data\\WinFolders\\Desktop\\pic.png", 10, bkClr, frClr);
+		Display d = new Display(x, y, cellSize, maze);
+		Graphics.export(maze, path, cellSize, bkClr, frClr);
 		
 		//call a function that opens a window with the maze
 		//call a function that opens a window with an export option and then returns

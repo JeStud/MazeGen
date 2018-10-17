@@ -1,4 +1,4 @@
-package graphics;
+package frames;
 
 import java.awt.Button;
 import java.awt.FlowLayout;
@@ -46,7 +46,7 @@ public class RectMazeDialogue extends JFrame
 		this.add(send);
 		send.addActionListener( rectMazeListener );
 		
-		this.setDefaultCloseOperation(Windows.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		this.setVisible(true);
 	}

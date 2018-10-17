@@ -1,4 +1,4 @@
-package graphics;
+package frames;
 
 public class Error {
 

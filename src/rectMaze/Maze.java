@@ -244,18 +244,18 @@ public class Maze
 		}
 	}
 	
-	public void draw(Graphics2D g, int cellSize)
+	public void draw(Graphics2D g2d, int cellSize)
 	{
 		for(int y=0;y<height;y++)
 		{
 			for(int x=0;x<width;x++)
 			{
 				RectNode tempNode = this.getNode(y, x);
-				g.fillRect((2*x+1)*cellSize, (2*y+1)*cellSize, cellSize, cellSize);
+				g2d.fillRect((2*x+1)*cellSize, (2*y+1)*cellSize, cellSize, cellSize);
 				
 				for(Direction direction : tempNode.connections)
 				{
-					g.fillRect( ((2*x+1) + direction.getX())*cellSize, ((2*y+1) + direction.getY())*cellSize, cellSize, cellSize);
+					g2d.fillRect( ((2*x+1) + direction.getX())*cellSize, ((2*y+1) + direction.getY())*cellSize, cellSize, cellSize);
 				}
 			}
 		}

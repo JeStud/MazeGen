@@ -3,7 +3,7 @@ package main;
 import java.awt.Color;
 import java.awt.Frame;
 
-import graphics.RectMazeDialogue;
+import frames.RectMazeDialogue;
 
 public class Main {
 
