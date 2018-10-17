@@ -1,5 +1,6 @@
 package rectMaze;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Collections;
 import java.util.Random;
@@ -244,8 +245,12 @@ public class Maze
 		}
 	}
 	
-	public void draw(Graphics g, int cellSize)
+	public void draw(Graphics g, Color backCol, Color foreCol, int cellSize)
 	{
+		g.setColor(backCol);
+		g.fillRect(0, 0, (2*this.getWidth()+1)*cellSize, (2*this.getHeight()+1)*cellSize);
+		g.setColor(foreCol);
+		
 		for(int y=0;y<height;y++)
 		{
 			for(int x=0;x<width;x++)

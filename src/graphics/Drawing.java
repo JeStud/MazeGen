@@ -16,11 +16,8 @@ public class Drawing
 	{
 		BufferedImage pic = new BufferedImage( (2*m.getWidth()+1)*cellSize, (2*m.getHeight()+1)*cellSize, BufferedImage.TYPE_INT_ARGB);
 		Graphics g = pic.getGraphics();
-		g.setColor(backCol);
-		g.fillRect(0, 0, (2*m.getWidth()+1)*cellSize, (2*m.getHeight()+1)*cellSize);
-		g.setColor(foreCol);
 		
-		m.draw(g, cellSize);
+		m.draw(g, backCol, foreCol, cellSize);
 		
 		return pic;
 	}

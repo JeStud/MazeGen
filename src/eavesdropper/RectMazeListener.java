@@ -46,7 +46,7 @@ public class RectMazeListener implements ActionListener
 			{ frClr = Color.RED;/*TODO display an error pop up*/ }
 		
 		Maze maze = Maze.depthFirstGen(y, x, true);
-		Display d = new Display(x, y, cellSize, maze);
+		Display d = new Display(x, y, bkClr, frClr, cellSize, maze);
 		Drawing.export(maze, path, cellSize, bkClr, frClr);
 		
 		//call a function that opens a window with the maze
