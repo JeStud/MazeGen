@@ -23,7 +23,7 @@ public class Display extends JFrame
 	{			
 		public void paint(Graphics g)
 		{
-			maze.draw(g, 10);
+			maze.draw(g, cellSize);
 		}
 	}
 	
@@ -32,8 +32,8 @@ public class Display extends JFrame
 		this.maze = maze;
 		this.cellSize = cellSize;
 		
-		int tempX = x*cellSize+2;
-		int tempY = y*cellSize+21;
+		int tempX = (2*x+1)*cellSize;
+		int tempY = (2*y+1)*cellSize;
 		if(tempX<MIN_WIDTH)
 			tempX = MIN_WIDTH;
 		if(tempY<MIN_HEIGHT)
