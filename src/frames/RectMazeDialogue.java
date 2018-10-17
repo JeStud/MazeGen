@@ -22,32 +22,39 @@ public class RectMazeDialogue extends JFrame
 	
 	public RectMazeDialogue()
 	{
+		JFormattedTextField cellField = rectMazeListener.getCellField();
 		JFormattedTextField widthField = rectMazeListener.getWidthField();
 		JFormattedTextField heightField = rectMazeListener.getHeightField();
 		JFormattedTextField backgroundColorField = rectMazeListener.getBackgroundColorField();
 		JFormattedTextField foregroundColorField = rectMazeListener.getForegroundColorField();
-		
+		JFormattedTextField pathField = rectMazeListener.getPathField();
+
 		this.setTitle("Some title");
-		this.setSize(384,216);
+		this.setSize(600, 200);
 		this.setLayout(flow);
 
+		this.add(cellField);
+		cellField.setValue(5);
+		cellField.setColumns(5);
 		this.add(widthField);
 		widthField.setValue(10);
 		widthField.setColumns(5);
 		this.add(heightField);
 		heightField.setValue(10);
 		heightField.setColumns(5);
-		
+
 		this.add(backgroundColorField);
 		backgroundColorField.setColumns(5);
 		this.add(foregroundColorField);
 		foregroundColorField.setColumns(5);
-		
+		this.add(pathField);
+		pathField.setColumns(50);
+
 		this.add(send);
 		send.addActionListener( rectMazeListener );
-		
+
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		this.setVisible(true);
 	}
 }

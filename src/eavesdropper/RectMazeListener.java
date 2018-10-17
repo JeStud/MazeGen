@@ -13,20 +13,24 @@ import rectMaze.Maze;
 
 public class RectMazeListener implements ActionListener
 {
-	private final int cellSize = 10;
-	private final String path = "D:\\Data\\WinFolders\\Desktop\\pic.png";
-	
+	private JFormattedTextField cellField = new JFormattedTextField(NumberFormat.getNumberInstance());
 	private JFormattedTextField widthField = new JFormattedTextField(NumberFormat.getNumberInstance());
 	private JFormattedTextField heightField = new JFormattedTextField(NumberFormat.getNumberInstance());
-	private JFormattedTextField backgroundColorField = new JFormattedTextField("000000"); //TODO needs the # added on to the front
-	private JFormattedTextField foregroundColorField = new JFormattedTextField("FFFFFF"); //TODO needs the # added on to the front
-	
+	private JFormattedTextField backgroundColorField = new JFormattedTextField("000000");
+	private JFormattedTextField foregroundColorField = new JFormattedTextField("FFFFFF");
+	private JFormattedTextField pathField = new JFormattedTextField("D:\\Data\\WinFolders\\Desktop\\pic.png");
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		int x, y;
+		int x, y, cellSize;
 		Color bkClr, frClr;
+		String path;
 		//get field values and generate maze
-		//check if the width/height is an int and save as x and y
+		//check if the cell/width/height is an int and save as cellSize, x and y
+		try
+			{ cellSize = Integer.parseInt( cellField.getText() ); }
+		catch(NumberFormatException exceptX)
+			{ cellSize = 10;/*TODO display an error pop up*/ }
 		try
 			{ x = Integer.parseInt( widthField.getText() ); }
 		catch(NumberFormatException exceptX)
@@ -44,6 +48,10 @@ public class RectMazeListener implements ActionListener
 			{ frClr = Color.decode("#" + foregroundColorField.getText() ); }
 		catch(NumberFormatException exceptFR)
 			{ frClr = Color.RED;/*TODO display an error pop up*/ }
+		try
+			{ path = pathField.getText(); }
+		catch(NumberFormatException exceptFR)
+			{ path = "D:\\\\Data\\\\WinFolders\\\\Desktop\\\\pic.png";/*TODO display an error pop up*/ }
 		
 		Maze maze = Maze.depthFirstGen(y, x, true);
 		Display d = new Display(x, y, bkClr, frClr, cellSize, maze);
@@ -53,6 +61,10 @@ public class RectMazeListener implements ActionListener
 		//call a function that opens a window with an export option and then returns
 	}
 	
+	public JFormattedTextField getCellField()
+	{
+		return this.cellField;
+	}
 	public JFormattedTextField getWidthField()
 	{
 		return this.widthField;
@@ -68,5 +80,9 @@ public class RectMazeListener implements ActionListener
 	public JFormattedTextField getForegroundColorField()
 	{
 		return this.foregroundColorField;
+	}
+	public JFormattedTextField getPathField()
+	{
+		return this.pathField;
 	}
 }

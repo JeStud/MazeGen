@@ -41,7 +41,7 @@ public class Display extends JFrame
 			tempY = MAX_HEIGHT;
 
 		this.setTitle("Display Maze");
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setVisible(true);
 		
 		MazePanel panel = new MazePanel();
