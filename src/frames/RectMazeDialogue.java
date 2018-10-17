@@ -2,23 +2,24 @@ package frames;
 
 import java.awt.Button;
 import java.awt.FlowLayout;
-import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 
+import eavesdropper.ExitListener;
 import eavesdropper.RectMazeListener;
 
 public class RectMazeDialogue extends JFrame
 {
 	private Button send = new Button("enter");
+	private Button exit = new Button("exit");
 	
 	private static final int HORIZONTAL_GAP = 10;
     private static final int VERTICAL_GAP = 10;
 	private static FlowLayout flow = new FlowLayout(FlowLayout.CENTER, HORIZONTAL_GAP, VERTICAL_GAP);
 	
 	private RectMazeListener rectMazeListener = new RectMazeListener();
+	private ExitListener exitListener = new ExitListener();
 	
 	public RectMazeDialogue()
 	{
@@ -52,6 +53,8 @@ public class RectMazeDialogue extends JFrame
 
 		this.add(send);
 		send.addActionListener( rectMazeListener );
+		this.add(exit);
+		exit.addActionListener( exitListener );
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
