@@ -8,7 +8,7 @@ import java.text.NumberFormat;
 import javax.swing.JFormattedTextField;
 
 import frames.Display;
-import graphics.Graphics;
+import graphics.Drawing;
 import rectMaze.Maze;
 
 public class RectMazeListener implements ActionListener
@@ -47,7 +47,7 @@ public class RectMazeListener implements ActionListener
 		
 		Maze maze = Maze.depthFirstGen(y, x, true);
 		Display d = new Display(x, y, cellSize, maze);
-		Graphics.export(maze, path, cellSize, bkClr, frClr);
+		Drawing.export(maze, path, cellSize, bkClr, frClr);
 		
 		//call a function that opens a window with the maze
 		//call a function that opens a window with an export option and then returns

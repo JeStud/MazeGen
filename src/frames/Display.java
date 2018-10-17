@@ -1,11 +1,12 @@
 package frames;
 
 import java.awt.Dimension;
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import graphics.MazePanel;
 import rectMaze.Maze;
 
 public class Display extends JFrame
@@ -14,9 +15,23 @@ public class Display extends JFrame
 	private final int MAX_HEIGHT = 1000;
 	private final int MIN_WIDTH = 200;
 	private final int MIN_HEIGHT = 150;
+	
+	private Maze maze;
+	private int cellSize;
 
-	public Display(int x, int y, int cellSize, Maze m)
+	private class MazesPanel extends JPanel
+	{			
+		public void paint(Graphics g)
+		{
+			maze.draw(g, 10);
+		}
+	}
+	
+	public Display(int x, int y, int cellSize, Maze maze)
 	{
+		this.maze = maze;
+		this.cellSize = cellSize;
+		
 		int tempX = x*cellSize+2;
 		int tempY = y*cellSize+21;
 		if(tempX<MIN_WIDTH)
@@ -29,20 +44,15 @@ public class Display extends JFrame
 			tempY = MAX_HEIGHT;
 
 		this.setTitle("Display Maze");
-		//this.setSize(tempX, tempY);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
 		
-		JPanel panel = new JPanel();
-		this.add(panel);
+		MazesPanel panel = new MazesPanel();
+		this.setContentPane(panel);
 		panel.setPreferredSize(new Dimension(tempX, tempY));
 		panel.setOpaque(true);
 		this.pack();
 		
-		Graphics2D g2d = (Graphics2D) panel.getGraphics();
-		m.draw(g2d, 10);
-		//this.paint(g2d);
-		this.repaint();
-
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
+		Graphics g = this.getGraphics();
 	}
 }

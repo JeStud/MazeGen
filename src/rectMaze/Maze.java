@@ -1,6 +1,6 @@
 package rectMaze;
 
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;
@@ -244,18 +244,18 @@ public class Maze
 		}
 	}
 	
-	public void draw(Graphics2D g2d, int cellSize)
+	public void draw(Graphics g, int cellSize)
 	{
 		for(int y=0;y<height;y++)
 		{
 			for(int x=0;x<width;x++)
 			{
 				RectNode tempNode = this.getNode(y, x);
-				g2d.fillRect((2*x+1)*cellSize, (2*y+1)*cellSize, cellSize, cellSize);
+				g.fillRect((2*x+1)*cellSize, (2*y+1)*cellSize, cellSize, cellSize);
 				
 				for(Direction direction : tempNode.connections)
 				{
-					g2d.fillRect( ((2*x+1) + direction.getX())*cellSize, ((2*y+1) + direction.getY())*cellSize, cellSize, cellSize);
+					g.fillRect( ((2*x+1) + direction.getX())*cellSize, ((2*y+1) + direction.getY())*cellSize, cellSize, cellSize);
 				}
 			}
 		}

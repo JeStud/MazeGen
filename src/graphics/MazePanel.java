@@ -1,13 +1,16 @@
 package graphics;
 
+import java.awt.Graphics;
+
 import javax.swing.JPanel;
 
-import java.awt.Graphics2D;
+import rectMaze.Maze;
 
 public class MazePanel extends JPanel {
-	public void paintComponent(Graphics2D g2d)
+	Maze maze;
+	
+	public void paint(Graphics g)
 	{
-		//draw on g here e.g.
-		g2d.fillRect(20, 20, 100, 200);
+		maze.draw(g, 10);
 	}
 }
