@@ -1,8 +1,8 @@
-package helper;
+package helperClasses;
 
 import java.util.HashSet;
 
-import helper.Direction;
+import helperClasses.Direction;
 
 public class RectNode
 {

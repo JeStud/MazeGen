@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.Stack;
 
-import helper.Direction;
-import helper.RectNode;
+import helperClasses.Direction;
+import helperClasses.RectNode;
 
 public class Maze
 {
