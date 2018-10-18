@@ -58,7 +58,9 @@ public class RectMazeListener implements ActionListener
 		}
 		catch(NumberFormatException exceptFR)
 		{
-			frames.Error err = new frames.Error( exceptFR.toString() );
+			String errorMessage = exceptFR.getMessage();
+			String errorCause = errorMessage.split(":")[1];
+			frames.Error err = new frames.Error( "Sorry, invalid entry:" + errorCause);
 			
 		}
 		
