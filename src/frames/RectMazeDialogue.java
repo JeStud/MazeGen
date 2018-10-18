@@ -47,7 +47,7 @@ public class RectMazeDialogue extends JFrame
 		exit.addActionListener( exitListener );
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 }
