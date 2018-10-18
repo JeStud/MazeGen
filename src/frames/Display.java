@@ -11,6 +11,7 @@ import rectMaze.Maze;
 
 public class Display extends JFrame
 {
+	private final int MIN_WIDTH = 200;
 	private final int MAX_WIDTH = 1900;
 	private final int MAX_HEIGHT = 1000;
 	
@@ -35,6 +36,8 @@ public class Display extends JFrame
 		
 		int tempX = (2*x+1)*cellSize;
 		int tempY = (2*y+1)*cellSize;
+		if(tempX<MIN_WIDTH)
+			tempX = MIN_WIDTH;
 		if(tempX>MAX_WIDTH)
 			tempX = MAX_WIDTH;
 		if(tempY>MAX_HEIGHT)
