@@ -11,8 +11,8 @@ import eavesdropper.RectMazeListener;
 
 public class RectMazeDialogue extends JFrame
 {
-	private Button send = new Button("enter");
-	private Button exit = new Button("exit");
+	private Button send = new Button("generate new maze");
+	private Button exit = new Button("exit program");
 	
 	private static final int HORIZONTAL_GAP = 10;
     private static final int VERTICAL_GAP = 10;
