@@ -1,7 +1,9 @@
 package helperClasses;
 
+//directions for nodes in a maze
 public enum Direction
 {
+	//numerical translation for directions
 	UP(-1,0,"^"), RIGHT(0,1,">"), DOWN(1,0,"v"), LEFT(0,-1,"<");
     public int y,x;
     public String pointer;

@@ -13,15 +13,19 @@ import frames.Display;
 import graphics.Drawing;
 import rectMaze.Maze;
 
+//Listener responsible for all data input and generating mazes
+//passes various swing elements so that they can be displayed in a frame and still be read in this class
 public class RectMazeListener implements ActionListener
 {
-	private JFormattedTextField  cellField = new JFormattedTextField ("5");
-	private JFormattedTextField  widthField = new JFormattedTextField ("10");
-	private JFormattedTextField  heightField = new JFormattedTextField ("10");
-	private JFormattedTextField  backgroundColorField = new JFormattedTextField ("000000");
-	private JFormattedTextField  foregroundColorField = new JFormattedTextField ("FFFFFF");
-	private JFormattedTextField  pathField = new JFormattedTextField ("D:\\Data\\WinFolders\\Desktop\\pic.png");
+	//Text Fields for all variables the user may edit
+	private JFormattedTextField cellField = new JFormattedTextField ("5");
+	private JFormattedTextField widthField = new JFormattedTextField ("10");
+	private JFormattedTextField heightField = new JFormattedTextField ("10");
+	private JFormattedTextField backgroundColorField = new JFormattedTextField ("000000");
+	private JFormattedTextField foregroundColorField = new JFormattedTextField ("FFFFFF");
+	private JFormattedTextField pathField = new JFormattedTextField ("D:\\Data\\WinFolders\\Desktop\\pic.png");
 	
+	//Labels for each text field
 	JLabel cellLabel = new JLabel("Cell Size");
 	JLabel widthLabel = new JLabel("Maze Width");
 	JLabel heightLabel = new JLabel("Maze Height");
@@ -29,6 +33,7 @@ public class RectMazeListener implements ActionListener
 	JLabel foregroundLabel = new JLabel("Foreground Color");
 	JLabel pathLabel = new JLabel("System Path (+file name)");
 	
+	//Panels that organize the content and are passed to other classes
 	private JPanel cellPanel = new JPanel();
 	private JPanel widthPanel = new JPanel();
 	private JPanel heightPanel = new JPanel();
@@ -63,11 +68,11 @@ public class RectMazeListener implements ActionListener
 			frames.Error err = new frames.Error( "Sorry, invalid entry:" + errorCause);
 			
 		}
-		
-		//call a function that opens a window with the maze
-		//call a function that opens a window with an export option and then returns
+
+		//TODO call a function that opens a window with an export option and then returns
 	}
 	
+	//getters: used to display elements that are still accessible in this class
 	public JPanel getCell()
 	{
 		cellPanel.setLayout(new BorderLayout());

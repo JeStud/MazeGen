@@ -9,8 +9,10 @@ import javax.swing.JPanel;
 
 import rectMaze.Maze;
 
+//a window that shows the generated maze
 public class Display extends JFrame
 {
+	//max and min window size values to ensure half decent windows
 	private final int MIN_WIDTH = 200;
 	private final int MAX_WIDTH = 1900;
 	private final int MAX_HEIGHT = 1000;
@@ -21,6 +23,7 @@ public class Display extends JFrame
 
 	private class MazePanel extends JPanel
 	{
+		//magical method that gets called automagically somewhere, draws the maze
 		public void paint(Graphics g)
 		{
 			maze.draw(g, bkCol, frCol, cellSize);
@@ -34,6 +37,7 @@ public class Display extends JFrame
 		this.bkCol = bkCol;
 		this.frCol = frCol;
 		
+		//check if the window size is ok
 		int tempX = (2*x+1)*cellSize;
 		int tempY = (2*y+1)*cellSize;
 		if(tempX<MIN_WIDTH)

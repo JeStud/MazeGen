@@ -9,20 +9,25 @@ import javax.swing.JPanel;
 import eavesdropper.ExitListener;
 import eavesdropper.RectMazeListener;
 
+//main frame, contains all fields and drives everything
 public class RectMazeDialogue extends JFrame
 {
+	//generation and quit buttons
 	private Button send = new Button("generate new maze");
 	private Button exit = new Button("exit program");
 	
+	//niceness things for the layout
 	private static final int HORIZONTAL_GAP = 10;
     private static final int VERTICAL_GAP = 10;
 	private static FlowLayout flow = new FlowLayout(FlowLayout.CENTER, HORIZONTAL_GAP, VERTICAL_GAP);
 	
+	//listeners for the generate and quit buttons
 	private RectMazeListener rectMazeListener = new RectMazeListener();
 	private ExitListener exitListener = new ExitListener();
 	
 	public RectMazeDialogue()
 	{
+		//get the panels that we need to display
 		JPanel cellField = rectMazeListener.getCell();
 		JPanel widthField = rectMazeListener.getWidth();
 		JPanel heightField = rectMazeListener.getHeight();

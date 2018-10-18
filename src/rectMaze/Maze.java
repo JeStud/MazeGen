@@ -9,6 +9,7 @@ import java.util.Stack;
 import helperClasses.Direction;
 import helperClasses.RectNode;
 
+//a maze, made up of nodes
 public class Maze
 {
 	//MAZE VARIABLES

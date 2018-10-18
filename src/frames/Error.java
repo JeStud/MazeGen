@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+//simple error message pop up to let the user know what field is improperly entered
 public class Error extends JFrame {
 	
 	public Error(String problem)

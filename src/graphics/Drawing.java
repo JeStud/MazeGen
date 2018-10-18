@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 
 import rectMaze.Maze;
 
+//main graphical class responsible for the actual drawing of images and exporting to files
 public class Drawing
 {
 	public static BufferedImage draw(Maze m, int cellSize, Color backCol, Color foreCol)

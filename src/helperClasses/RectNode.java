@@ -4,9 +4,12 @@ import java.util.HashSet;
 
 import helperClasses.Direction;
 
+//nodes or cells in a maze
 public class RectNode
 {
+	//directions to connected nodes
 	public HashSet<Direction> connections;
+	//whether the node is part of the maze yet
 	public Boolean unvisited = true;
 	
 	public RectNode()
