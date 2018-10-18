@@ -13,9 +13,9 @@ import rectMaze.Maze;
 
 public class RectMazeListener implements ActionListener
 {
-	private JFormattedTextField cellField = new JFormattedTextField(NumberFormat.getNumberInstance());
-	private JFormattedTextField widthField = new JFormattedTextField(NumberFormat.getNumberInstance());
-	private JFormattedTextField heightField = new JFormattedTextField(NumberFormat.getNumberInstance());
+	private JFormattedTextField cellField = new JFormattedTextField("5");
+	private JFormattedTextField widthField = new JFormattedTextField("10");
+	private JFormattedTextField heightField = new JFormattedTextField("10");
 	private JFormattedTextField backgroundColorField = new JFormattedTextField("000000");
 	private JFormattedTextField foregroundColorField = new JFormattedTextField("FFFFFF");
 	private JFormattedTextField pathField = new JFormattedTextField("D:\\Data\\WinFolders\\Desktop\\pic.png");

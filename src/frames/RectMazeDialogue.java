@@ -35,15 +35,11 @@ public class RectMazeDialogue extends JFrame
 		this.setLayout(flow);
 
 		this.add(cellField);
-		cellField.setValue(5);
 		cellField.setColumns(5);
 		this.add(widthField);
-		widthField.setValue(10);
 		widthField.setColumns(5);
 		this.add(heightField);
-		heightField.setValue(10);
 		heightField.setColumns(5);
-
 		this.add(backgroundColorField);
 		backgroundColorField.setColumns(5);
 		this.add(foregroundColorField);
