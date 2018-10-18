@@ -1,11 +1,13 @@
 package eavesdropper;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import frames.Display;
 import graphics.Drawing;
@@ -13,12 +15,26 @@ import rectMaze.Maze;
 
 public class RectMazeListener implements ActionListener
 {
-	private JFormattedTextField cellField = new JFormattedTextField("5");
-	private JFormattedTextField widthField = new JFormattedTextField("10");
-	private JFormattedTextField heightField = new JFormattedTextField("10");
-	private JFormattedTextField backgroundColorField = new JFormattedTextField("000000");
-	private JFormattedTextField foregroundColorField = new JFormattedTextField("FFFFFF");
-	private JFormattedTextField pathField = new JFormattedTextField("D:\\Data\\WinFolders\\Desktop\\pic.png");
+	private JFormattedTextField  cellField = new JFormattedTextField ("5");
+	private JFormattedTextField  widthField = new JFormattedTextField ("10");
+	private JFormattedTextField  heightField = new JFormattedTextField ("10");
+	private JFormattedTextField  backgroundColorField = new JFormattedTextField ("000000");
+	private JFormattedTextField  foregroundColorField = new JFormattedTextField ("FFFFFF");
+	private JFormattedTextField  pathField = new JFormattedTextField ("D:\\Data\\WinFolders\\Desktop\\pic.png");
+	
+	JLabel cellLabel = new JLabel("Cell Size");
+	JLabel widthLabel = new JLabel("Maze Width");
+	JLabel heightLabel = new JLabel("Maze Height");
+	JLabel backgroundLabel = new JLabel("Background Color");
+	JLabel foregroundLabel = new JLabel("Foreground Color");
+	JLabel pathLabel = new JLabel("System Path (+file name)");
+	
+	private JPanel cellPanel = new JPanel();
+	private JPanel widthPanel = new JPanel();
+	private JPanel heightPanel = new JPanel();
+	private JPanel backgroundPanel = new JPanel();
+	private JPanel foregroundPanel = new JPanel();
+	private JPanel pathPanel = new JPanel();
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -61,28 +77,47 @@ public class RectMazeListener implements ActionListener
 		//call a function that opens a window with an export option and then returns
 	}
 	
-	public JFormattedTextField getCellField()
+	public JPanel getCell()
 	{
-		return this.cellField;
+		cellPanel.setLayout(new BorderLayout());
+		cellPanel.add(cellLabel, BorderLayout.NORTH);
+		cellPanel.add(cellField, BorderLayout.SOUTH);
+		return this.cellPanel;
 	}
-	public JFormattedTextField getWidthField()
+	public JPanel getWidth()
 	{
-		return this.widthField;
+		widthPanel.setLayout(new BorderLayout());
+		widthPanel.add(widthLabel, BorderLayout.NORTH);
+		widthPanel.add(widthField, BorderLayout.SOUTH);
+		return this.widthPanel;
 	}
-	public JFormattedTextField getHeightField()
+	public JPanel getHeight()
 	{
-		return this.heightField;
+		heightPanel.setLayout(new BorderLayout());
+		heightPanel.add(heightLabel, BorderLayout.NORTH);
+		heightPanel.add(heightField, BorderLayout.SOUTH);
+		return this.heightPanel;
 	}
-	public JFormattedTextField getBackgroundColorField()
+	public JPanel getBackgroundColor()
 	{
-		return this.backgroundColorField;
+		backgroundPanel.setLayout(new BorderLayout());
+		backgroundPanel.add(backgroundLabel, BorderLayout.NORTH);
+		backgroundPanel.add(backgroundColorField, BorderLayout.SOUTH);
+		return this.backgroundPanel;
 	}
-	public JFormattedTextField getForegroundColorField()
+	public JPanel getForegroundColor()
 	{
-		return this.foregroundColorField;
+		foregroundPanel.setLayout(new BorderLayout());
+		foregroundPanel.add(foregroundLabel, BorderLayout.NORTH);
+		foregroundPanel.add(foregroundColorField, BorderLayout.SOUTH);
+		return this.foregroundPanel;
 	}
-	public JFormattedTextField getPathField()
+	public JPanel getPath()
 	{
-		return this.pathField;
+		pathPanel.setLayout(new BorderLayout());
+		pathField.setColumns(50);
+		pathPanel.add(pathLabel, BorderLayout.NORTH);
+		pathPanel.add(pathField, BorderLayout.SOUTH);
+		return this.pathPanel;
 	}
 }

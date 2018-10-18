@@ -3,8 +3,8 @@ package frames;
 import java.awt.Button;
 import java.awt.FlowLayout;
 
-import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import eavesdropper.ExitListener;
 import eavesdropper.RectMazeListener;
@@ -23,29 +23,23 @@ public class RectMazeDialogue extends JFrame
 	
 	public RectMazeDialogue()
 	{
-		JFormattedTextField cellField = rectMazeListener.getCellField();
-		JFormattedTextField widthField = rectMazeListener.getWidthField();
-		JFormattedTextField heightField = rectMazeListener.getHeightField();
-		JFormattedTextField backgroundColorField = rectMazeListener.getBackgroundColorField();
-		JFormattedTextField foregroundColorField = rectMazeListener.getForegroundColorField();
-		JFormattedTextField pathField = rectMazeListener.getPathField();
+		JPanel cellField = rectMazeListener.getCell();
+		JPanel widthField = rectMazeListener.getWidth();
+		JPanel heightField = rectMazeListener.getHeight();
+		JPanel backgroundColorField = rectMazeListener.getBackgroundColor();
+		JPanel foregroundColorField = rectMazeListener.getForegroundColor();
+		JPanel pathField = rectMazeListener.getPath();
 
 		this.setTitle("Some title");
 		this.setSize(600, 200);
 		this.setLayout(flow);
 
 		this.add(cellField);
-		cellField.setColumns(5);
 		this.add(widthField);
-		widthField.setColumns(5);
 		this.add(heightField);
-		heightField.setColumns(5);
 		this.add(backgroundColorField);
-		backgroundColorField.setColumns(5);
 		this.add(foregroundColorField);
-		foregroundColorField.setColumns(5);
 		this.add(pathField);
-		pathField.setColumns(50);
 
 		this.add(send);
 		send.addActionListener( rectMazeListener );
