@@ -1,8 +1,8 @@
 package frames;
 
-import java.awt.Button;
 import java.awt.FlowLayout;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -12,16 +12,16 @@ import eavesdropper.RectMazeListener;
 //main frame, contains all fields and drives everything
 public class RectMazeDialogue extends JFrame
 {
-	//generation and quit buttons
-	private Button send = new Button("generate new maze");
-	private Button exit = new Button("exit program");
+	//generation and quit JButtons
+	private JButton send = new JButton("generate new maze");
+	private JButton exit = new JButton("exit program");
 	
 	//niceness things for the layout
 	private static final int HORIZONTAL_GAP = 10;
     private static final int VERTICAL_GAP = 10;
 	private static FlowLayout flow = new FlowLayout(FlowLayout.CENTER, HORIZONTAL_GAP, VERTICAL_GAP);
 	
-	//listeners for the generate and quit buttons
+	//listeners for the generate and quit JButtons
 	private RectMazeListener rectMazeListener = new RectMazeListener();
 	private ExitListener exitListener = new ExitListener();
 	
